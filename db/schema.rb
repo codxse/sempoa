@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_07_091220) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_11_103925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "jwt_blacklisted_tokens", force: :cascade do |t|
+    t.string "jti"
+    t.bigint "user_id", null: false
+    t.datetime "exp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jti"], name: "index_jwt_blacklisted_tokens_on_jti", unique: true
+    t.index ["user_id"], name: "index_jwt_blacklisted_tokens_on_user_id"
+  end
+
+  create_table "jwt_refresh_tokens", force: :cascade do |t|
+    t.string "crypted_token"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crypted_token"], name: "index_jwt_refresh_tokens_on_crypted_token", unique: true
+    t.index ["user_id"], name: "index_jwt_refresh_tokens_on_user_id"
+  end
+
+  create_table "jwt_whitelisted_tokens", force: :cascade do |t|
+    t.string "jti"
+    t.bigint "user_id", null: false
+    t.datetime "exp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jti"], name: "index_jwt_whitelisted_tokens_on_jti", unique: true
+    t.index ["user_id"], name: "index_jwt_whitelisted_tokens_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -23,4 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_07_091220) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "jwt_blacklisted_tokens", "users"
+  add_foreign_key "jwt_refresh_tokens", "users"
+  add_foreign_key "jwt_whitelisted_tokens", "users"
 end

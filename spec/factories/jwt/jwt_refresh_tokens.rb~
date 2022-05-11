@@ -1,0 +1,6 @@
+FactoryBot.define do
+  factory :jwt_refresh_token do
+    crypted_token { "MyString" }
+    user { nil }
+  end
+end

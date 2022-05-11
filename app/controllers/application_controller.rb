@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound do |e|
     Rails.logger.error e.message
@@ -14,7 +16,7 @@ class ApplicationController < ActionController::Base
 
     respond_to do |format|
       format.html do
-        render file: Rails.root.join("public/404.html"), layout: false, status: :not_found
+        render file: Rails.root.join('public/404.html'), layout: false, status: :not_found
       end
 
       format.json do

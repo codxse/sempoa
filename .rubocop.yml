@@ -1,0 +1,54 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  NewCops: enable
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: No
+
+Style/ClassVars:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 200
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/MethodLength:
+  Max: 60
+
+Metrics/AbcSize:
+  Max: 50
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+  Enabled: No
+
+Metrics/PerceivedComplexity:
+  Enabled: True
+
+Metrics/BlockLength:
+  Max: 30
+  IgnoredMethods: ['describe', 'context']
+
+ClassAndModuleChildren:
+  Enabled: False
+
+Style/BlockComments:
+  Enabled: False
+
+Layout/CommentIndentation:
+  Enabled: False
+
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: snake_case
+
+Naming/InclusiveLanguage:
+  Enabled: False

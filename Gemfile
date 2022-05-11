@@ -84,4 +84,6 @@ group :test do
   gem "capybara-screenshot"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "shoulda", "~> 4.0"
+  gem "shoulda-matchers", "~> 4.5", require: false
 end
