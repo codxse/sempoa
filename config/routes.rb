@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       post "login", to: "claims#create"
       post "register", to: "users#create"
       resources :users, only: [:index, :show, :create, :update, :destroy]
+
+      namespace :jwt do
+        get 'issue', to: 'user#jwt'
+        post 'refresh', to: 'user#jwt'
+      end
     end
   end
 

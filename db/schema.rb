@@ -15,9 +15,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_103925) do
   enable_extension "plpgsql"
 
   create_table "jwt_blacklisted_tokens", force: :cascade do |t|
-    t.string "jti"
+    t.string "jti", null: false
     t.bigint "user_id", null: false
-    t.datetime "exp"
+    t.datetime "exp", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_blacklisted_tokens_on_jti", unique: true
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_103925) do
   end
 
   create_table "jwt_refresh_tokens", force: :cascade do |t|
-    t.string "crypted_token"
+    t.string "crypted_token", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,9 +34,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_103925) do
   end
 
   create_table "jwt_whitelisted_tokens", force: :cascade do |t|
-    t.string "jti"
+    t.string "jti", null: false
     t.bigint "user_id", null: false
-    t.datetime "exp"
+    t.datetime "exp", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_whitelisted_tokens_on_jti", unique: true
@@ -44,12 +44,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_103925) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
+    t.string "first_name", null: false
     t.string "last_name"
-    t.integer "role"
-    t.string "password"
+    t.integer "role", null: false
+    t.string "password", null: false
+    t.string "username"
+    t.string "email", null: false
+    t.boolean "email_verified", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username", "email"], name: "index_users_on_username_and_email", unique: true
   end
 
   add_foreign_key "jwt_blacklisted_tokens", "users"

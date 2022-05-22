@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :jwt_refresh_token, class: 'Jwt::RefreshToken' do
-    crypted_token { Jwt::EncoderModule.generate_unique }
+    user { FactoryBot.create(:user) }
   end
 end

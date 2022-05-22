@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :user do
-    first_name { 'MyString' }
-    last_name { 'MyString' }
+    first_name { FFaker::Name.first_name  }
+    last_name { FFaker::Name.last_name }
     role { 1 }
-    password { 'MyString' }
+    password { 'password' }
+    email { FFaker::Internet.email }
   end
 end

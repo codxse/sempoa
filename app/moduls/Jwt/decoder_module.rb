@@ -10,7 +10,7 @@ module Jwt
       options = default_options.merge(options)
       decoded = JWT.decode(access_token, Jwt::ConstantsModule::SECRET, verify, options).first
 
-      raise StandardError.new "Errors::Jwt::InvalidToken" unless decoded.present?
+      raise StandardError.new "Errors::Jwt::DecoderModule#decode! InvalidToken" unless decoded.present?
 
       decoded.symbolize_keys
     end
